@@ -16,14 +16,10 @@ install:
   - git clone --branch "$PILLAR_RELEASE" https://github.com/pillar-markup/pillar.git "$HOME/pillar"
   - ( cd $HOME/pillar; ./scripts/build.sh; )
   - $HOME/pillar/scripts/ci/install-texlive
-  - ./LLVM-C-Tutorial/_support/latex/ensure-deps-2019.sh
+  - ./_support/latex/ensure-deps.sh
 
 script:
-  - cd LLVM-C-Tutorial
-  - pillar build pdf
-
-after_failure:
-  - cat _result/pdf/index.log
+  - pillar build pdf index.pillar
 
 after_success:
   - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
